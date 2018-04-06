@@ -1,0 +1,66 @@
+\section{Funktionsprinzip}\label{sec:funktion}
+
+Um Daten auf einem Flash-Speicher nicht-flüchtig sichern zu können, werden die Ladezustände der einzelnen Bits auf so genannten \emph{Floating Gates} auf einer Art speziellen Transistor abgelegt. 
+
+Die Ladung dieser Floating Gates sorgt schlussendlich dafür, dass die unterhalb dessen angebrachten Kontakte für \emph{Source} und \emph{Drain} leitend verbunden sind oder nicht.
+
+\subsection{MOS-Feldeffekttransistor}
+
+Die Grundlage für den Floating-Gate-Transistoren (FGMOS) ist der MOSFET. Dieser existiert in verschiedenen Varianten: Anreicherungs- und Verarmungstyp, sowie \gls{ndotiert} und \gls{pdotiert}.
+
+Wie aus Kapitel \ref{sec:fgfet} ersichtlich befindet sich der MOSFET grundsätzlich in einem Sperrzustand. Dies bedeutet, dass die Verbindung zwischen Source- und Drain-Anschluss nicht leitend ist. Um diesen leitend zu machen, wird eine Spannung zwischen Source- und Gate-Anschluss angelegt.
+
+Dadurch werden aus dem umgebenden p-dotierten Substrat (viele Löcher, wenig Elektronen) die verbliebenen Elektronen in den Bereich unter dem Gate-Anschluss gezogen. So entsteht unter dem Gate und zwischen Source und Drain ein leitender Kanal, dessen Leitfähigkeit durch die Spannung am Gate gesteuert werden kann (s. Abbildung \ref{fig:mosfetleitend}).
+
+\begin{figure}[h]
+    \centering
+    \caption{Leitender Gang im MOSFET bei Spannung am Gate}
+    \includegraphics[width=5cm]{sections/img/mosfet2}
+    \label{fig:mosfetleitend}
+    \\ Quelle: \cite{mosfetkomp}
+\end{figure}
+
+Die Spannung, die am Gate benötigt wird, um die Verbindung zwischen Source und Drain herzustellen, nennt sich \emph{Schwellspannung}.
+
+Der Verarmungstyp ist immer leitend, da eine leicht n-dotierte Schicht zwischen den ebenfalls n-dotierten Source- und Drain-Inseln angebracht ist. Er wird sperrend (nicht-leitend) wenn die Gatespannung negativer ist als die Spannung am Source-Anschluss.
+
+Zusammenfassend lässt sich sagen, dass ein MOSFET wie ein Schalter ist: Liegt eine Spannung am Gate an, dann wird die Verbindung zwischen Source und Drain leitend. Liegt keine Spannung am Gate an, dann ist die Verbindung zwischen Source und Drain getrennt.
+
+\subsection{Floating Gate-Transistor}
+
+Der Floating Gate-Transistor ist eine Art leicht abgewandelter MOSFET.  Das Floating Gate, welches sich elektrisch isoliert zwischen dem Substrat und der Gate-Elektrode befindet, kann eine Ladung speichern und diese mehrere Jahre erhalten.
+
+Um das Floating Gate zu laden, macht man sich den quantenmechanischen Tunneleffekt zur Nutze. Dieser ermöglicht es, eine Ladung durch eine nicht-leitende Schicht hindurch zu transportieren (in Anlehnung an \parencite{tunneleffektwiki}).
+
+Um das Floating Gate zu laden, wird eine viel stärkere Spannung an Source und Gate angelegt, als die Schwellspannung, die "`zum Öffnen des Schalters"' nötig wäre (z.B.: 10V anstatt 3,3V). Dadurch wandern Elektronen durch die isolierende Schicht des Floating Gates in dieses. Da es jedoch isoliert ist, können diese nicht mehr "`abfließen"' -- das Floating Gate bleibt geladen.
+
+Ist nun das Floating Gate geladen, wirkt es gleich wie ein MOSFET, bei dem Spannung an das Steuerungsgate gelegt wird: Die Verbindung zwischen Source und Drain wird leitend (angelehnt an \parencite{quora}).
+
+Um den Wert im FGFET auszulesen muss nun nur überprüft werden, ob die Verbindung zwischen Source und Drain leitend ist oder nicht.
+
+\subsection{NAND- und NOR-Speicher}
+
+
+
+\subsection{SLC-, MLC- und TLC-Flash-Speicher}
+Das Floating Gate der Single-Level-Cell ist nur in der Lage zwei Zustände -- geladen und ungeladen -- anzunehmen. Aus Platzgründen begann man damit, mehrere Zustände in einem Floating Gate zu speichern.
+
+So entstanden die Multi-Level-Zellen. Diese sind in der Lage, zwei Bits zu speichern, können also vier Zustände annehmen, wobei jeder Zustand einer unterschiedlich großen Ladung entspricht.
+
+Analog dazu können Triple-Level-Zellen drei Bit speichern. Eine Übersicht über die verschiedenen Zellen gibt die folgende Tabelle \ref{tab:slcmlc}.
+
+\begin{table}[h]
+    \centering
+    \caption{Übersicht über SLC-, MLC und TLC-Flash-Speicher}
+    \begin{tabular}{p{3cm}|l|l|l}
+        & \textbf{Single Level Cell} & \textbf{Multi Level Cell} & \textbf{Triple Level Cell} \\ \hline
+        \textbf{Bit pro Zelle} & 1 Bit & 2 Bit & 3 Bit \\ \hline
+        \textbf{Speicherbare Zustände} & 2 ($2^1$) & 4 ($2^2$) & 8 ($2^3$) \\ \hline
+        \textbf{Lebensdauer} & 100'000 Schreibvorgänge & 3'000 Schreibvorgänge & ca. 1'000 Schreibvorgänge \\ \hline
+        \textbf{Fehlerrate} & sehr niedrig & mittel & hoch \\ \hline
+        \textbf{Geschwindigkeit} & sehr hoch & niedrig & niedrig \\ \hline
+        \textbf{Stromverbrauch} & sehr niedrig & hoch & hoch \\ \hline
+    \end{tabular}
+    \label{tab:slcmlc}
+    Quelle: \cite{flashspeicherkomp}
+\end{table}
